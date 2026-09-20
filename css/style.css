@@ -1,0 +1,840 @@
+
+
+:root {
+  --olive: #3F5142;
+  --cream: #F5F0E6;
+  --brown: #7A6449;
+  --gold: #C6A15B;
+  --charcoal: #252925;
+  --white: #ffffff;
+  --light-green: #E7EBE4;
+  --nav-height: 78px;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height); /* عنوان بخش‌ها زیر نوار بالا نرود */
+}
+
+body {
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+  background-color: var(--cream);
+  color: var(--charcoal);
+  line-height: 1.9;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+
+/* ---------- نوار بالا ---------- */
+
+.navbar {
+  --bs-navbar-color: rgba(255, 255, 255, 0.92);
+  --bs-navbar-hover-color: #fff;
+  --bs-navbar-active-color: #fff;
+
+  padding: 18px 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), transparent);
+  transition: padding 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+
+/* بعد از کمی اسکرول (کلاس را main.js اضافه می‌کند) */
+.navbar.scrolled {
+  padding: 10px 0;
+  background: rgba(37, 41, 37, 0.96);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  color: var(--white);
+}
+
+.brand-name {
+  font-family: Georgia, serif;
+  font-size: 27px;
+  letter-spacing: 3px;
+}
+
+.brand-sub {
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.nav-link {
+  margin: 0 8px;
+  font-size: 14px;
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 8px;
+  width: 0;
+  height: 2px;
+  background-color: var(--gold);
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: calc(100% - 16px);
+}
+
+
+/* ---------- دکمه‌ها ---------- */
+
+.btn-gold,
+.btn-green,
+.btn-outline-green {
+  --bs-btn-border-radius: 30px;
+  --bs-btn-padding-x: 1.6rem;
+  --bs-btn-padding-y: 0.6rem;
+  --bs-btn-font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.btn-gold.btn-lg {
+  --bs-btn-padding-x: 2.1rem;
+  --bs-btn-padding-y: 0.75rem;
+  --bs-btn-font-size: 1rem;
+}
+
+.btn-gold {
+  background-color: var(--gold);
+  color: white;
+  border: 1px solid var(--gold);
+}
+
+.btn-gold:hover {
+  background-color: #ad8744;
+  border-color: #ad8744;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-green {
+  background-color: var(--olive);
+  color: white;
+  border: none;
+}
+
+.btn-green:hover {
+  background-color: #304033;
+  color: white;
+}
+
+.btn-outline-green {
+  width: 100%;
+  border: 1px solid var(--olive);
+  color: var(--olive);
+  margin-top: 12px;
+}
+
+.btn-outline-green:hover {
+  background-color: var(--olive);
+  color: white;
+}
+
+
+/* ---------- بالای صفحه ---------- */
+
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--charcoal);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* متن سمت راست است (RTL)، پس تیره‌ترین قسمت هم سمت راست باشد */
+.hero-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.15));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.hero-small {
+  font-size: 14px;
+  color: #e4d5b8;
+}
+
+.hero h1 {
+  font-size: clamp(45px, 6vw, 75px);
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 15px 0;
+}
+
+.hero p {
+  max-width: 480px;
+  font-size: 16px;
+  color: #eeeeee;
+  margin-bottom: 30px;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+
+  color: white;
+  font-size: 12px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.scroll-down i {
+  animation: bounce 1.8s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+
+/* ---------- بخش‌های عمومی ---------- */
+
+.section-padding {
+  padding: 100px 0;
+}
+
+.section-label {
+  color: var(--brown);
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  color: var(--olive);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.section-heading {
+  max-width: 650px;
+  margin: auto;
+}
+
+.section-heading p {
+  color: #666;
+  margin-top: 10px;
+}
+
+
+/* ---------- درباره ما ---------- */
+
+.about-section {
+  background-color: var(--cream);
+}
+
+.about-image {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 25px;
+}
+
+.section-text {
+  color: #5c5c5c;
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.text-link {
+  display: inline-block;
+  color: var(--olive);
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.text-link i {
+  margin-right: 5px;
+}
+
+
+/* ---------- اتاق‌ها ---------- */
+
+.rooms-section {
+  background-color: #faf8f2;
+}
+
+.room-card {
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(40, 40, 40, 0.07);
+  height: 100%;
+  transition: 0.3s;
+}
+
+.room-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 15px 35px rgba(40, 40, 40, 0.12);
+}
+
+.room-image {
+  height: 210px;
+  overflow: hidden;
+}
+
+.room-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+}
+
+.room-card:hover .room-image img {
+  transform: scale(1.06);
+}
+
+.room-content {
+  padding: 22px;
+}
+
+.room-content h3 {
+  color: var(--olive);
+  font-size: 18px;
+}
+
+.room-content p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.room-price {
+  color: var(--brown);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* پنجره‌ی جزئیات اتاق */
+
+.room-modal-img {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.room-modal-meta {
+  color: var(--brown);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.room-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: #555;
+}
+
+.room-features i {
+  color: var(--olive);
+  margin-left: 6px;
+}
+
+.room-modal-price {
+  color: var(--olive);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+
+/* ---------- امکانات ---------- */
+
+.facilities-section {
+  padding: 100px 0;
+  background-color: var(--olive);
+  color: white;
+}
+
+.light-text .section-label,
+.light-text .section-title {
+  color: white;
+}
+
+.light-text p {
+  color: #d6ddd6;
+}
+
+.facility {
+  padding: 20px 10px;
+}
+
+.facility i {
+  width: 65px;
+  height: 65px;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto auto 15px;
+  font-size: 25px;
+}
+
+.facility h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.facility p {
+  color: #cdd4cd;
+  font-size: 13px;
+}
+
+
+/* ---------- گالری ---------- */
+
+.gallery-section {
+  background-color: var(--cream);
+}
+
+.gallery-item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.04);
+  filter: brightness(0.9);
+}
+
+
+/* نمایش بزرگ عکس */
+
+.lightbox .modal-content {
+  background: transparent;
+  border: 0;
+}
+
+.lightbox-img {
+  width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+}
+
+.lightbox-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+  z-index: 3;
+}
+
+.lightbox-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-prev { right: 12px; }
+.lightbox-next { left: 12px; }
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0;
+  padding: 24px 16px 10px;
+  text-align: center;
+  font-size: 13px;
+  color: white;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  border-radius: 0 0 6px 6px;
+}
+
+
+/* ---------- نظرها ---------- */
+
+.reviews-section {
+  background-color: #faf8f2;
+}
+
+.review-card {
+  background: white;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 8px 25px rgba(40, 40, 40, 0.06);
+  height: 100%;
+}
+
+.stars {
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 15px;
+}
+
+.star-off {
+  color: #ddd5c3;
+}
+
+.review-card p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.review-card strong {
+  color: var(--olive);
+  font-size: 14px;
+}
+
+.review-meta {
+  display: block;
+  color: #777;
+  font-size: 12px;
+}
+
+
+/* ---------- دعوت به رزرو ---------- */
+
+.booking-section {
+  min-height: 420px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--olive);
+}
+
+.booking-overlay {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.booking-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* لایه‌ی تیره روی عکس، تا متن سفید خوانا باشد */
+.booking-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(30, 40, 31, 0.62);
+}
+
+.booking-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.booking-content span {
+  color: #e4d5b8;
+  font-size: 14px;
+}
+
+.booking-content h2 {
+  font-size: clamp(30px, 4vw, 48px);
+  margin: 10px 0;
+}
+
+.booking-content p {
+  margin-bottom: 25px;
+  color: #eeeeee;
+}
+
+
+/* ---------- تماس ---------- */
+
+.contact-section {
+  padding: 100px 0;
+  background-color: var(--cream);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  color: #555;
+  font-size: 14px;
+}
+
+.contact-item a {
+  color: inherit;
+}
+
+.contact-item a:hover {
+  color: var(--olive);
+}
+
+.contact-item i {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--light-green);
+  color: var(--olive);
+  border-radius: 50%;
+}
+
+.contact-box {
+  background-color: white;
+  padding: 35px;
+  border-radius: 6px;
+  box-shadow: 0 10px 35px rgba(50, 50, 50, 0.07);
+}
+
+.contact-box h3 {
+  color: var(--olive);
+  margin-bottom: 25px;
+}
+
+.form-label {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.form-control,
+.form-select {
+  min-height: 50px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 0.15rem rgba(198, 161, 91, 0.15);
+}
+
+.invalid-feedback {
+  font-size: 12px;
+}
+
+
+/* ---------- پایین صفحه ---------- */
+
+footer {
+  background-color: var(--charcoal);
+  color: white;
+  padding: 30px 0;
+}
+
+.footer-brand {
+  font-family: Georgia, serif;
+  font-size: 24px;
+  letter-spacing: 3px;
+}
+
+.footer-brand span {
+  display: block;
+  font-family: "Vazirmatn", sans-serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.social-icons a {
+  color: white;
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid #555;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  background-color: var(--gold);
+  border-color: var(--gold);
+}
+
+.copyright {
+  margin: 0;
+  color: #aaa;
+  font-size: 13px;
+}
+
+
+/* ---------- ریسپانسیو ---------- */
+
+@media (max-width: 991px) {
+
+  .navbar {
+    background: rgba(37, 41, 37, 0.95);
+  }
+
+  .navbar-nav {
+    padding: 15px 0;
+  }
+
+  .nav-link {
+    padding: 8px 0;
+  }
+
+  .hero {
+    min-height: 90vh;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero p {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  /* وسط‌چین بودن متن؛ گرادیان یکدست‌تر شود */
+  .hero-overlay::after {
+    background: rgba(0, 0, 0, 0.45);
+  }
+
+  .about-image {
+    height: 350px;
+  }
+}
+
+
+@media (max-width: 576px) {
+
+  .section-padding {
+    padding: 70px 0;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .contact-box {
+    padding: 25px 20px;
+  }
+
+  .footer-brand,
+  .copyright {
+    text-align: center !important;
+  }
+
+  .social-icons {
+    margin: 20px 0;
+  }
+
+  .lightbox-btn {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+
+/* برای کسانی که انیمیشن را در سیستم‌شان خاموش کرده‌اند */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
